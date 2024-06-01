@@ -25,22 +25,22 @@ wss.on('connection', function connection(ws) {
     } 
     
     // Create Offer
-    else if (message.type === 'createoffer') {
+    else if (message.type === 'create-offer') {
       if (ws !== senderSocket) {
         return;
       }
       console.log("got the offer");
-      receiverSocket?.send (JSON.stringify({ type: 'createofferr', sdp: message.sdp }));
+      receiverSocket?.send (JSON.stringify({ type: 'create-offer', sdp: message.sdp }));
     } 
 
     // Create Answer
-    else if (message.type === 'createanswer') {
+    else if (message.type === 'create-answer') {
       console.log("before receiversocket");
       if (ws !== receiverSocket) {
         return;
       }
       console.log("got the answer");
-      senderSocket?.send (JSON.stringify({ type: 'createanswer', sdp: message.sdp }));
+      senderSocket?.send (JSON.stringify({ type: 'create-answer', sdp: message.sdp }));
     }
 
     // Add Ice Candidate

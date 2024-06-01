@@ -11,13 +11,13 @@ export function Receiver(){
 
         socket.onmessage = async (event) => {
             const message = JSON.parse(event.data);
-            if (message.type === 'createoffer') {
+            if (message.type === 'create-offer') {
                 // Create Answer
                 const pc = new RTCPeerConnection();
                 pc.setRemoteDescription(message.sdp);
                 const answer = await pc.createAnswer();
                 await pc.setLocalDescription(answer);
-                socket.send(JSON.stringify({ type:'createanswer', sdp: pc.localDescription }));
+                socket.send(JSON.stringify({ type:'create-answer', sdp: pc.localDescription }));
             }
         }
     }, []);

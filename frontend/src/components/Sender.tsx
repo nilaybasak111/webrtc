@@ -22,11 +22,11 @@ export function Sender(){
         console.log(offer); // May be it sends the sdp
         await pc.setLocalDescription(offer);
         console.log("local dec set");
-        socket?.send(JSON.stringify({ type: 'createoffer', sdp: pc.localDescription }));
+        socket?.send(JSON.stringify({ type: 'create-offer', sdp: pc.localDescription }));
 
         socket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            if (data.type === 'createanswer') {
+            if (data.type === 'create-answer') {
                 pc.setRemoteDescription(data.sdp);
             }
 
